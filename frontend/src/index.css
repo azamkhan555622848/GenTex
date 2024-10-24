@@ -1,0 +1,469 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.App {
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.chat-pane {
+  width: 300px;
+  padding: 20px;
+  background-color: #f0f0f0;
+  display: flex;
+  flex-direction: column;
+}
+
+.main-content {
+  flex: 1;
+  display: flex;
+  position: relative;
+  overflow: hidden;
+  min-width: 0;
+}
+
+.editor-pane {
+  width: 50%; /* Set initial width to 50% */
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border-right: 1px solid #ccc;
+  min-width: 0;
+  flex-shrink: 0; /* Prevent shrinking */
+}
+
+.editor-toolbar {
+  padding: 5px;
+  background-color: #f0f0f0;
+  border-bottom: 1px solid #ddd;
+}
+
+.editor-container {
+  flex: 1;
+  overflow: hidden;
+  height: 100%;
+  background-color: #ffffff;
+}
+
+.editor-container .react-codemirror2 {
+  height: 100%;
+  width: 100%;
+}
+
+.editor-container .CodeMirror {
+  height: 100% !important;
+  width: 100% !important;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.preview-pane {
+  width: 50%; /* Set initial width to 50% */
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  padding: 10px;
+  background-color: #f0f0f0;
+  min-width: 0;
+  flex-shrink: 0; /* Prevent shrinking */
+}
+
+.pdf-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px 10px;
+  background-color: #ffffff;
+  border-radius: 4px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  margin-bottom: 10px;
+}
+
+.pdf-toolbar-left,
+.pdf-toolbar-center,
+.pdf-toolbar-right {
+  display: flex;
+  align-items: center;
+}
+
+.pdf-toolbar-center {
+  flex-grow: 1;
+  justify-content: center;
+}
+
+.pdf-toolbar button {
+  background-color: transparent;
+  border: none;
+  color: #333;
+  font-size: 16px;
+  cursor: pointer;
+  padding: 5px 10px;
+  margin: 0 2px;
+  border-radius: 4px;
+}
+
+.pdf-toolbar button:hover {
+  background-color: #f0f0f0;
+}
+
+.pdf-toolbar button:disabled {
+  color: #999;
+  cursor: not-allowed;
+}
+
+.pdf-toolbar span {
+  margin: 0 10px;
+}
+
+.pdf-container {
+  flex: 1;
+  overflow: auto;
+  background-color: #ffffff;
+  border-radius: 4px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 20px;
+  min-height: 0;
+}
+
+.page-navigation {
+  display: flex;
+  align-items: center;
+}
+
+.page-navigation span {
+  margin: 0 10px;
+}
+
+.zoom-controls {
+  display: flex;
+  align-items: center;
+}
+
+.zoom-controls span {
+  margin: 0 10px;
+  min-width: 50px;
+  text-align: center;
+}
+
+.compile-button {
+  align-self: flex-start;
+  margin-bottom: 10px;
+}
+
+.chat-history {
+  flex-grow: 1;
+  overflow-y: auto;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  padding: 10px;
+  background-color: white;
+}
+
+.chat-message {
+  margin-bottom: 5px;
+}
+
+.chat-message.user {
+  text-align: right;
+  color: #0066cc;
+}
+
+.chat-message.assistant {
+  text-align: left;
+  color: #006600;
+}
+
+.chat-pane textarea {
+  width: 100%;
+  height: 60px;
+  margin-bottom: 10px;
+  resize: vertical;
+}
+
+.ai-buttons {
+  display: flex;
+  justify-content: space-between;
+}
+
+.ai-buttons button {
+  flex: 1;
+  margin: 0 5px;
+}
+
+.error-message {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #ff6b6b;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  z-index: 1000;
+}
+
+.pdf-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.pdf-controls button, .pdf-controls span {
+  margin: 0 5px;
+}
+
+button {
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+button:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+.auth-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.auth-container form {
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+  margin-bottom: 20px;
+}
+
+.auth-container input {
+  margin-bottom: 10px;
+  padding: 5px;
+}
+
+/* Remove or comment out the logout button styles */
+/*
+.logout-button {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  z-index: 1000;
+}
+*/
+
+.toolbar-button {
+  background-color: transparent;
+  border: none;
+  color: #333;
+  font-size: 16px;
+  margin: 0 5px;
+  cursor: pointer;
+  padding: 5px 10px;
+  border-radius: 4px;
+}
+
+.toolbar-button:hover {
+  background-color: #e0e0e0;
+}
+
+.compile-button {
+  margin-left: auto;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.compile-button:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+.file-list {
+  margin-top: 20px;
+}
+
+.file-list h3 {
+  margin-bottom: 10px;
+}
+
+.file-list ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.file-list li {
+  padding: 5px 0;
+  border-bottom: 1px solid #eee;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.delete-file-button {
+  background-color: transparent;
+  border: none;
+  color: #ff4d4d;
+  cursor: pointer;
+  padding: 5px;
+  font-size: 14px;
+}
+
+.delete-file-button:hover {
+  color: #ff0000;
+}
+
+.file-list-pane {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+  background-color: #f8f8f8;
+  border-left: 1px solid #ddd;
+  padding: 20px;
+  overflow-y: auto;
+  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+  resize: horizontal;
+  min-width: 200px;
+  max-width: 500px;
+}
+
+.file-list-drag-handle {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 5px;
+  background-color: #ddd;
+  cursor: ew-resize;
+}
+
+.file-list-drag-handle:hover,
+.file-list-drag-handle:active {
+  background-color: #999;
+}
+
+.file-list-pane h3 {
+  margin-top: 0;
+  margin-bottom: 15px;
+}
+
+.file-list-pane ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.file-list-pane li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.input-container {
+  position: relative;
+}
+
+.autocomplete {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background-color: white;
+  border: 1px solid #ddd;
+  max-height: 150px;
+  overflow-y: auto;
+  z-index: 1000;
+}
+
+.autocomplete-option {
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.autocomplete-option:hover {
+  background-color: #f0f0f0;
+}
+
+.editor-resize-handle {
+  width: 5px;
+  background-color: #ccc;
+  cursor: col-resize;
+  transition: background-color 0.3s ease;
+  flex-shrink: 0; /* Prevent shrinking */
+}
+
+.editor-resize-handle:hover,
+.editor-resize-handle:active {
+  background-color: #999;
+}
+
+.toolbar-button:disabled {
+  color: #999;
+  cursor: not-allowed;
+}
+
+.react-pdf__Document {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.react-pdf__Page {
+  margin: 10px 0;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+}
+
+.react-pdf__Page canvas {
+  max-width: 100%;
+  height: auto !important;
+}
+
+/* Add these styles */
+.pdf-placeholder {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  background-color: #f8f9fa;
+  border: 2px dashed #dee2e6;
+  border-radius: 4px;
+  color: #6c757d;
+  text-align: center;
+  padding: 20px;
+}
+
+.pdf-placeholder p {
+  margin: 5px 0;
+  font-size: 16px;
+}
+
+.pdf-placeholder p:first-child {
+  font-weight: bold;
+}
